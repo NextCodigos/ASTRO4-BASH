@@ -959,6 +959,396 @@ import DefaultLayout from "../layouts/DefaultLayout.astro";
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 
+Añado volver a home pulsando boton desde about:
+
+DefaultLayout.astro:
+
+<html lang="en">
+  <head>
+    <!-- Para utilzar head con diferentes nombres ,sino pongo en otras paginas toma este title por defecto-->
+    <slot name="header">
+      <meta slot="header" charset="utf-8" />
+      <link slot="header" rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      <meta slot="header" name="viewport" content="width=device-width" />
+      <meta slot="header" name="generator" content={Astro.generator} />
+      <title slot="header">Astro</title>
+    </slot>
+  </head>
+  <body>
+    <main>
+      <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <div
+          class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+        >
+          <a
+            href="https://flowbite.com/"
+            class="flex items-center space-x-3 rtl:space-x-reverse"
+          >
+            <img
+              src="https://flowbite.com/docs/images/logo.svg"
+              class="h-8"
+              alt="Flowbite Logo"
+            />
+            <span
+              class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+              >Flowbite</span
+            >
+          </a>
+          <button
+            data-collapse-toggle="navbar-default"
+            type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 1h15M1 7h15M1 13h15"></path>
+            </svg>
+          </button>
+          <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+            <ul
+              class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+            >
+              <li>
+                <a
+                  href="/"
+                  class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                  aria-current="page">Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/about"
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >Pricing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <slot />
+    </main>
+  </body>
+</html>
+
+
+
+
+////////////////////////////////////////////
+////////////////////////////////////////////
+
+En Astro podemos 
+
+Modos de renderizado
+una es con una prer renderización en el momento de la construcción o en el bu
+Time y la otra es renderizado bajo demanda por el servidor Qué significan estas opciones esto significa lo
+siguiente por ejemplo imagínate en nuestro caso que tenemos un blog que hace una petición a una base de datos
+para sacar el contenido y mostrarlo en la página o un post por cada uno de los
+post que tengo en la base de datos Entonces qué va a pasar si utilizamos el
+método por defecto que utiliza Astro para la renderización que es el método
+de prer rendered o o static esto lo que hace que en el momento cuando compilamos
+ya cuando construimos nuestra aplicación para subirla a un Hosting para ya Alo jarla en internet lo que va a hacer es
+que va a compilar todas las páginas necesarias es decir lo que haría sería
+en el momento de la compilación cuando se está ya compilando la aplicación
+haría la petición a la base de datos para conseguir todos los post y ya generaría la página con contenido
+estático de todos los posts que tenía en ese momento Qué ventaja tiene esto que la página ya está generada con los posts
+Entonces cuando subamos nuestra página de internet y un usuario acceda no tenemos que esperar a que se haga esa
+petición a la base de datos para obtener la información de los post dado que la página cuando se hizo el proceso de
+compilación ya se encargó de traer todos los posts que había y crear la página
+con esa información Entonces cuando el usuario acceda la información está lista al instante por eso es tan rápido porque
+no tiene que ir al servidor ya la página ya está generada con la información es
+instantáneo Entonces esto tiene una Clara ventaja que es la velocidad y tiene otra desventaja Cuál
+es la desventaja que como el contenido Ya está renderizado si nosotros creamos
+en nuestra base de datos un nuevo post el usuario no lo va a ver porque los usor el contenido que está viendo es el
+que había en el momento del compilado de la aplicación eso es una desventaja y la
+otra desventaja es que no podríamos por ejemplo Mostrar distinto contenido en
+función a información de la petición por ejemplo imagina que yo quiero mostrar
+una página distinta en función de si la persona haciendo la petición está en España o en Estados Unidos eso no lo
+podría hacer ya que la página está prender no puede acceder a la información de la
+petición y aquí te dice as en su documentación dice el método estático es
+el mejor que hay para sitios que tien mucho contenido Que se actualiza de
+forma poco frecuente y que muestra el mismo contenido a todos Los visitantes
+ent si tu aplicación cumple con alguno de estos requisitos o con estos requisitos en general que se actualiza
+lo que es el contenido en sí se actualiza de forma poco frecuente y
+además muestra el mismo contenido a todos Los visitantes de la página pues
+esta es la mejor opción para ti porque vas a ganar mucha velocidad y después tienes otras dos opciones tienes la de
+server que es para aplicaciones web que necesitan o que tienen un contenido
+altamente Dinámico que tiene que actualizarse al momento y esto pues lo
+que haría sería el proceso clásico un usuario hace una petición Y entonces esa
+petición si la página necesita hacer la petición a la base de datos Pues habría que esperar a que se haga esa petición y
+se construya la página en función a esos datos Y también tendremos la ventaja de poder acceder a la información de la
+petición ya que la página se está construyendo en el servidor por cada petición Cuál sería la desventaja de
+este método pues que no sería tan Rápido como el otro ya que tenemos que pasar por ese proceso de hacer la petición a
+la base de datos traernos los datos y generar la página en función a eso Entonces utilizar uno u otro pues
+depende de de lo que tú necesites Ya te lo he dicho Astro si tienes un si tienes
+una aplicación que necesita actualizarse constantemente que los datos estén siempre actualizados pues lo mejor para
+ti va a ser utilizar el el método de renderización del servidor sin embargo si tus datos no se
+tiene que actualizar de forma muy frecuente pues entonces va a ser más mejor utilizar el pre rendered que va a
+ser mucho más rápido Y por último tenemos la opción híbrida que es para
+sitios webs que tiene su mayoría de págin estática es decir que no necesitan
+actualizarse de forma frecuente Pero hay algunas concretas que sí necesitan actualizarse de forma de forma frecuente
+entonces tendríamos una mezcla de las dos entonces Cómo cambio todos estos ajustes pues si yo voy aquí a la
+configuración de Astro solo tendría que Añadir una opción llamada
+output y output como vemos dice hybrid server y static static es el que hemos
+dicho que es el más rápido pero que el contenido no se actualiza de forma inmediata y el server no es tan rápido
+pero siempre tenemos el último contenido disponible entonces que yo quiero server selecciono server que yo quiero static
+Pues selecciono static que yo quiero híbrido pues le pondría híbrido Entonces
+ya por cada página tendría que especificarlo entonces que est esta página en concreto quiero yo que sea
+prer renderizada que es la opción más rápida Pues mira como en esta página como no necesito yo contenido que se
+vaya actualizando porque siempre es el mismo contenido pues para ello tendría que exportar una constante llamarle pre
+render estamos viendo aquí PR render y ponerlo en tru de esta forma esta página
+se PR renderizar ira en el momento del compilado Sería más rápido y si al
+contrario lo que quisiera Es que esto se compilara en el servidor
+por cada petición pues esto en vez de true lo pondría en falso y si quiero que la mayoría de mis
+páginas tengan uno y yo simplemente cambiar la que yo quiera que sea diferente pues únicamente aquí en vez de
+híbrido imagina que la mayoría de mis páginas van a ser estáticas pero hay algunas que necesitan que sea en el
+servidor en vez de estática entonces simplemente a la página que yo quiera por ejemplo a esta le diy PR render
+falso y ya siempre que no le indique nada va a estar pre render va a ser
+static que es el que tenemos aquí y siempre que le indiquen lo contrario como en este caso pues
+entonces se va a renderizar el servidor no de forma estática Así que ya te digo Eso ya depende de las necesidades que tú
+tengas en nuestro caso lo vamos a dejar en estático que hay realmente como es la
+opción por defecto No necesitamos ni indicarla Y esa sería la opción por
+defecto para todas las páginas vale Y ahora querría que cuando yo haga un clic
+
+
+
+////////////////////////////////////////////
+////////////////////////////////////////////
+
+Páginas dinámicas
+en mis tarjetas me llevase como una página donde se muestre el contenido del post entero
+y para ello Yo quiero tener una especie de ruta que sea algo como barra post
+barra y el post en concreto por ejemplo el que tenga
+id1 Entonces cuando quiero tener rutas de varios niveles que no es por ejemplo como la de about que es simplemente un
+nivel sino que necesito tener dos dos niveles por ejemplo post barra y otro nivel entonces ahí tengo que utilizar
+carpetas aquí creo una carpeta con el nombre del nivel por ejemplo
+posts y ahora aquí pues si si este ya es el último nivel pues entonces sí lo hago
+a través de un archivo si hay más niveles de por medio pues sigo creando carpetas dentro pero claro fíjate que yo
+no puedo crear las páginas de forma estática Por qué primero porque si tengo
+40 post tendría que crear 40 páginas eso no tiene mucho sentido verdad y lo segundo es que realmente el número de
+post que tengo va a ir cambiando Entonces eso también me me imposibilita
+que yo cree aquí las páginas de forma estática creando la página y ya está primero eso porque tendría que crear 40
+50 60 páginas o lo que sea y después porque Qué pasaría cuando elimine o cree un post y habría por ahí páginas que
+sobran o que faltan Entonces en este caso lo que necesitamos se conoce como ruta
+dinámicas para poner una ruta dinámica vamos a crearla y vamos a ponerle un
+identificador al sector o al segmento que va a ser Dinámico en este caso como
+quiero identificar cada post por un ID le voy a poner de nombre ID vale este va a ser el segmento que voy a utilizar
+para identificarlo y ahora le pongo su extensión punto
+Astro y ahora aquí lo que puedo hacer por ejemplo es importar mi layout que es
+el que vamos a utilizar en todas las páginas vamos a importar le habíamos
+llamado default layout le voy a poner default
+layout y aquí dentro voy a mostrar por ejemplo estás en la página
+un si intentamos acceder a esa ruta post un por ejemplo nos va a dar un error que
+va a decir get static pad function required para ruta dinámica esto Qué significa significa que cuando
+utilizamos el modo de renderización en estático sabemos que todas las páginas
+se generan en el momento del compilado entonces para que en el
+compilado pueda saber cuántas página tiene que generar necesitamos utilizar
+una función esto no pasa si utilizamos el modelo de renderizado en el servidor
+porque entonces únicamente recibiríamos ese número ese ID del post
+y haríamos una petición a la base de datos y traíamos el contenido pero como el contenido se va a generar durante el
+compilado y cuando el usuario aceda ya va a estar listo pues Astro tiene que saber cuántas páginas tiene que generar
+en este caso tiene que generar una por cada post pues tenemos que decirle Cuántos post tenemos y Cuál es la
+información de cada uno de ellos que tiene que Mostrar así que bueno nos queda claro lo que necesitamos tenemos
+que exportar una función que la vamos a hacer asíncrona para poder utilizar a we dentro y la vamos a llamar get static
+pads lo primero que para saber cuántos post tenemos tenemos que hacer una
+petición a nuestra base de datos Entonces como esto ya lo hacíamos en la página principal voy a reutilizar el
+código que hacíamos para traer los distintos post Y ahora cuál es la
+sintaxis que tiene que tener esta función Pues aquí nos dice que por cada uno vale por cada uno de nuestros
+elementos en este caso por cada uno de nuestros post dentro de una aray tenemos que devolver un objeto con la propiedad
+params y el nombre de la propiedad que utilizamos para identificarlo que es el nombre que le hemos puesto a este
+segmento Dinámico el ID entonces sabemos que tenemos que devolver un objeto por
+cada uno de mis post Así que lo que voy a hacer es un map voy a recibir los post
+y por cada uno de ellos voy a devolver un objeto que ponga para
+y tenga una propiedad que en este caso es ID que va a equivaler al ID del post
+y ahora este array que se genera con el map es el que tengo que devolver de mi
+función y ahora vamos a ver que va a funcionar dice estás en la página uno lo que pasa que si yo accedo a la página
+dos también voy a decir esta es la página un porque es algo que yo he escrito de forma estática lo que podemos
+acceder lo que podemos hacer es acceder a ese parámetro que me están mandando en este caso
+Sid para ello voy a hacer un destructuring del objeto de Astro params
+y aquí voy a sacar el ID es lo que estoy utilizando y lo que le estoy pasando a la función de get static pads y ahora
+voy a hacer esta en la página
+ID esto Perdón lo tenemos que sacar fuera de la función aquí para que podamos
+acceder y ahora sí como vemos l vamos a la do dice a la dos si vamos a la uno dice estamos en la página uno y ahora
+como tenemos acceso al post que me están mandando puedo hacer una petición para
+obtener la información de ese poste en concreto por ejemplo podemos hacer lo
+siguiente vamos a poner post response vamos a hacer una petición de
+red y en vez de a todos los post vamos a
+indicar A qué post quiero hacerlo que en este caso es al que tiene este ID de
+aquí y ahora de nuevo haríamos el post sería el post
+response convertido a Jason y ahora tengo acceso a este post
+en concreto y podría decir está en la página ID del post y acceder a la
+información por ejemplo del post title Y fíjate dice estarse la página uno del
+post de benefits of mindfulness meditation si yo vo al dos pues se va a mostrar el título del dos si yo vo al
+tres se va a mostrar el título del tres y yo puedo ya aquí crear la página del post y ya lo único que nos faltaría
+sería actualizar nuestro componente de post para que tenga un enlace que al
+hacer clic me lleve a la página de ese post y para ello vamos a ir al componente de post y lo vamos a envolver
+todo dentro de un enlace voy a cortar todo esto lo voy a
+poner dentro de una etiqueta de enlace Y a dónde te va a llevar este enlace primero voy a sacar de los props el ID y
+ahora el href esto como le necesitamos pasar variable les necesito pasar las llaves
+para decir que vamos a poner el código javascript y la ruta va a ser barra post
+barra y el ID del post en concreto y ya de esta manera pues si yo hago clic aquí
+como vemos dice que estás en en el post exploring The Wall of astrophysics y así y así lo mismo ahora lo que yo quiero
+mostrar evidentemente Pues sería contenido con su imagen su título todo
+eso y voy reutilizar gran parte de lo que ya estoy utilizando aquí en mi en mi
+post voy a reutilizar gran parte de este contenido Solo que le voy a hacer un par
+de modificaciones vale vamos a pegar esto por aquí y lo vamos a meter
+dentro de un di por ejemplo vale Y ahora voy a hacer un
+destructuring de las propiedades para no tener que hacer post pun title post pun description y todo eso entonces aquí
+podría hacer directamente title
+description También estamos utilizando el content y por aquí teníamos también el
+created Entonces ya accedemos si tenemos estos estilo evidentemente Esto no es lo que queremos que se vea así porque ahora
+queremos que se vea todo completo así que vamos a hacer unas modificaciones en los estilos primero que nada le voy a
+quitar este fondo voy a poner el texto en
+negro y le voy a quitar Ya esta clase con este color a los
+párrafos no solo eso sino que además aquí no me interesa ni Mostrar la fecha ni nada de eso porque eso ya se ve fuera
+entonces me voy a quedar Únicamente con la imagen la descripción y el contenido
+y el contenido no lo vamos a cortar vamos a mostrar el contenido completo vale est se va apareciendo un poco más a
+lo que queremos nos faltaría únicamente cambiar el tamaño máximo le podemos poner como
+4xl esto ya tiene más sentido y podemos centrarlo dándole un margin a
+los lados de auto vale Y esto ya pues evidentemente se ve mejor Entonces ya podemos acceder a cada
+uno de los post y ver Su contenido completo as que hemos aprendido mucho en esta clase hemos aprendido a hacer rutas
+dinámicas y Cómo conseguir la información para que se puedan genererar todas estas páginas en el caso de que no
+hubiésemos utilizado en el caso de que esta página se render en el servidor pues ya no
+necesitaríamos esta función de get St p vale la podríamos quitar ahora
+evidentemente Esto me va a dar error pero si yo esto lo
+cambio y pongo el prender PR render se
+lo pongo en falso y puedo cambiar la configuración y ponerlo por ejemplo en
+híbrido Y fíjate que esto ya carga perfectamente sin necesitar dado que le
+hemos dicho que lo va a renderizar en el servidor ya no necesita la función de
+get static paths pero en el caso de que esto sí fuera prerender pues entonces vemos que ya
+falla porque ya sí necesita la función de get static pads para funcionar Y es
+pues lo comentado porque cuando lo generamos en el momento de la compilación tenemos que hacerle saber
+todos los post que tenemos para que pueda generar todas las posibles páginas vale porque recuerda que todas las
+páginas las va a generar en el instante que se compila y las va a subir todas Entonces cuando el usuario accede ya
+están todas compiladas y para ello tiene que saber por Cuántas tenemos Y por qué
+las vamos a identificar en este caso por un ID hemos visto que en el caso de que la renderización sea del lado del
+servidor esto no sería necesario otro de los puntos clave de Astro es que es
+Markdown
+capaz de generar una página a través de un archivo de Mark markdown si nunca lo habéis visto si no
+lo conocéis es unicamente un lenguaje muy sencillito que tiene ciertos
+elementos que nos permiten crear contenido algo formateado es decir poner
+título poner párrafos poner tablas poner imágenes sin utilizar html con una
+sintaxis muy sencilla y es muy utilizado en blogs entonces fíjate os podéis venir a esta página stackedit.io o las otras
+miles que que son Editores markdown si tú buscas editor markdown te van a salir estas y muchas más Y fíjate que la
+sintaxis que utiliza markdown puese ser por ejemplo una almohadilla para crear un título principal un h1 dos
+almohadillas para crear un subtítulo un h2 los párrafos pues irían así tal
+cual Vale entonces este tipo de sintaxis muy utilizada en los blogs Y fíjate como
+definen también las tablas con esta sintaxis aquí te viene de cómo hacer distintos tipos de cosas congr vamos a
+copiar todo esto y vamos a ver qué pasa si yo creo aquí una página que digo en
+page le voy Llamar ejemplo pun md que la sintaxis de markdown y lo voy a copiar
+todo Fíjate que si yo voy a la ruta ejemplo es capaz de renderizar todo ese
+contenido vale evidentemente uno tiene su forma de renderizar lo no
+va a ser igual que como lo renderiza está edit que ya le pone unos estilos en concreto pero lo que tú tienes es ya los
+elementos ves esto es un h1 esto es un párrafo vas a tener también los h2 que
+tú hayas que hayas puesto markdown con la doble almohadilla y tú ya esto puedes estilizarlo como tú quieras con css con
+tywin o lo que sea entonces eso también una de las características más destacadas que tiene que tiene Astro y
+quería enseñároslo vale es capacidad de renderizar archivo markdown directamente creándolo dentro del directorio de
+páginas ahora vamos a ver lo que os comenté al principio que Astro puede ser utilizado con cualquier framework de
+Islas
+componentes que tú ya conozcas vale como react PR View solid alpin muchos vale me
+parece que angular por ejemplo no está porque angular es un poco más especialito pero aquí tienen mucho
+entonces Si no te gusta la forma de crear componentes de y tú quieres utilizar real tú quieres utilizar View
+porque ya está acostumbrado a ello y por las ventajas que te puedan ofrecer pues
+simplemente en una nueva terminal tendríamos que ejecutar npx Astro ad
+igual que hemos hecho conta el Win pero en este caso voy a decir que quiero Añadir
+react y esto empezar a instalar todo lo necesario vo a decir que sí que instal
+las dependencia es decir que sí modifique el archivo de configuración Sí todo vale
+entonces ahora es tan fácil cóm crear un nuevo componente y como si estuviésemos
+utilizando re pued crear un componente por ejemplo llamado
+botón y le voy a poner extensión jsx que es la extensión de
+react y ya sabemos la síntesis de react para crear un un componente damos una
+función con el nombre del componente y la función devolvía el
+elemento y esto lo podemos importar en cualquier página por ejemplo en la
+página de abot yo puedo importar el componente
+Button y renderizar lo como un componente normal y lo puedo mezclar yo
+con componentes de View de incluso puedo tener componentes de View componentes de react y componentes de Astro en el mismo
+proyecto sin problema y ahora si voy a la página de abot ves tengo aquí el botón que dice Hola Hazme click vamos a
+añadirle interactividad a esto vamos a poner un on click y le vamos a pasar una
+función que diga Hazme o Gracias por dar
+click vamos a ver qué pasa ahora vamos a recargar le a dar Hazme
+click Hazme clic y en la consola no está pasando nada vamos a probar hacer una
+alerta que diga gracias a ver si la alerta funciona A ver por qué está
+pasando esto nada la alerta tampoco funciona y eso porque asro por defecto
+no añade interactividad a los componentes Para qué para no tener que enviar javascript innecesario al
+navegador dado que el javascript que manda pues es algo que ralentiza bastante una web Entonces lo mejor es
+mandar el mínimo javascrip necesario así que por defecto no manda nada pero claro
+perdemos la interactividad si yo necesito que mi componente sea interactivo hay una manera de
+solucionarlo y es pasándole esta opción de aquí de client al componente Pero hay
+distintos modos los cual pue cargar el javascript por ejemplo client visible
+que cuando el componente entra en el viewport es decir cuando está visible solamente se va a volver interactivo
+cuando entra en la página es decir mientras no esté visible no tiene por qué cargar el javascript si ponemos load
+Pues cuando carga la página Aunque el elemento no se vea ya lo va a cargar el cl invisible es una buena opción porque
+para qué quiero que tenga interactividad mientras el componente no se vea por lo tanto no van poder interactuar con él
+así que voy a ir a vot y a mi componente le voy a decir esto que dice aquí
+client y le voy a pasar visible y Esto va a hacer que cuando le
+haga clic va a decir gracias Ya va a funcionar la alerta y Fíjate que cuando vamos al menú que os decía al principio
+que te muestra si tienes islas de Astro ya nos aparece este cliente como una isla Entonces ya hemos visto lo que es
+una isla que es una isla dentro del astro para que te lo dice es cualquier componente de nuestra página que tenga
+interactividad Entonces el html es componente se renderiza en el servidor y después su
+lógica su javascript se carga cuando nosotros le digamos con la directiva client Pues eso simplemente es una isla
+dentro de Astro es un componente que tiene interactividad ahora vamos a ver
+ViewTransitions
+algo que me parece a mí increíble de Astro la verdad que se llama View transition transición entrevista Fíjate
+que si yo voy al código de mi layout y actualizo el enlace que me lleva al Home
+que lo tengo por aquí home le pongo que me lleve a la raíz de mi aplicación para
+ahora poder Navegar entre AB y home fíjate aquí arriba que esto causa que el
+navegador recargue la página V lo recarga entre cambio de
+páginas una opción que no emite Astro que nos da la posibilidad de dos cosas
+que están bastante bien una de de que haga el efecto de las típicas single
+paace application aplicaciones de una sola página que cuando cambiamos entre página y página nos refresca vale No
+refresca la página y lo segundo nos añade una transición bastante Guay
+bastante suave entre una página y otra lo Vais a ver aquí la documentación de
+la piedra te dice que Oye importa esto si lo
+quieres utilizar en todas las páginas pues entonces pong en el layout y todas las páginas que utilicen el layout van a
+tener este efecto así que dentro de la parte que es de código
+javascript recordamos que va entre esta estos guiones importamos el componente
+vi transition y aquí al final delad al final del slot vi transition
+ponemos el componente tiene que quedar aquí vale al final del Head no ponerlo dentro del slot ponerlo ya fuera y esto
+qué va a causar Pues fíjate el efecto cuando yo cambie de página ves que efecto más suave cuando es como que se
+va un contenido y aparece otro de forma suave y además aquí arriba podes Ver que
+esto no recarga la página así que bueno con esto ya finalizamos es todo lo que
+os quería enseñar sobre Astro evidentemente hay más cosas pero yo creo que con esto habéis podido ver la
+esencia de Astro no al menos suficiente para saber si os convence o no Si lo
+utilizáis o no por último deciros que he creado tanto un grupo de Facebook como un grupo de discord El de discord De
+hecho no lo creo todavía lo voy a crear justo cuando termine esta clase para que podamos hacer un poco de comunidad sobre
+el desarrollo web en español entonces seas del país que seas si eres de habla
+hispana y te gusta el desarrollo web Entonces te recomienda que te que te unas a los grupos que te voy a dejar en
+la descripción así que bueno si queréis ver algo más de astr si tenéis cualquier duda lo dejáis por los comentarios
+Español (generados automáticamente)
 
 
 
@@ -967,21 +1357,19 @@ import DefaultLayout from "../layouts/DefaultLayout.astro";
 ////////////////////////////////////////////
 
 
+Para configurar pagina principal con forma diferente;
 
+import { defineConfig } from 'astro/config';
 
+import tailwind from "@astrojs/tailwind";
 
-////////////////////////////////////////////
-////////////////////////////////////////////
-
-
-
-
-
-////////////////////////////////////////////
-////////////////////////////////////////////
-
-
-
+// https://astro.build/config
+export default defineConfig({
+  output:'hybrid',
+  // output:'server', // para subir informacion a diario menos rapido
+  // output:'static',//mas rapido pero no actualiza informacion base de datos
+  integrations: [tailwind()]
+});
 
 
 ////////////////////////////////////////////
