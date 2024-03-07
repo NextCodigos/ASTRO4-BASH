@@ -1,6 +1,5 @@
 #!/bin/nash
 
-#!/bin/bash
 
 echo "Bienvenido al script de configuración de Astro."
 
