@@ -2,6 +2,7 @@
 import Post from "../components/Post.astro";
 const response = await fetch("http://localhost:3000/posts");
 const posts = await response.json();
+import DefaultLayout from "../layouts/DefaultLayout.astro";
 ---
 
 <html lang="en">
@@ -13,11 +14,13 @@ const posts = await response.json();
     <title>Astro</title>
   </head>
   <body>
-    <h1 class="text-center text-3xl font-bold mb-6 mt-3">Mis posts</h1>
-    <div
-      class="grid max-w-7xl mx-auto w-full justify-center justify-items-center items-center gap-4 px-2 sm:grid:cols-2 lg:grid-cols-3"
-    >
-      {posts.map((post) => <Post post={post} />)}
-    </div>
+	<DefaultLayout>
+	<h1 class="text-center text-3xl font-bold mb-6 mt-3">Mis posts</h1>
+	<div
+		class="grid max-w-7xl mx-auto w-full justify-center justify-items-center items-center gap-4 px-2 sm:grid:cols-2 lg:grid-cols-3"
+	>
+		{posts.map((post) => <Post post={post} />)}
+	</div>
+	</DefaultLayout>
   </body>
 </html>
