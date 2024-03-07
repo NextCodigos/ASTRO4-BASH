@@ -5,15 +5,7 @@ const posts = await response.json();
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
+
 	<DefaultLayout>
 	<h1 class="text-center text-3xl font-bold mb-6 mt-3">Mis posts</h1>
 	<div
@@ -22,5 +14,3 @@ import DefaultLayout from "../layouts/DefaultLayout.astro";
 		{posts.map((post) => <Post post={post} />)}
 	</div>
 	</DefaultLayout>
-  </body>
-</html>
