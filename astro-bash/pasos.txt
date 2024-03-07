@@ -882,6 +882,19 @@ minuto 40:49
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 
+Creamos pagina about.astro:
+
+---
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+// import { Button } from "../components/Button";
+---
+
+<DefaultLayout>
+  <h1>Bienvenido a mi página About!</h1>
+  <!-- <Button client:visible /> -->
+</DefaultLayout>
+
+
 
 
 
