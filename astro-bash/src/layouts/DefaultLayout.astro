@@ -1,7 +1,13 @@
 <html lang="en">
   <head>
-    <!-- Para utilzar head con diferentes nombres -->
-    <slot name="header"/>
+    <!-- Para utilzar head con diferentes nombres ,sino pongo en otras paginas toma este title por defecto-->
+    <slot name="header">
+      <meta slot="header" charset="utf-8" />
+      <link slot="header" rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      <meta slot="header" name="viewport" content="width=device-width" />
+      <meta slot="header" name="generator" content={Astro.generator} />
+      <title slot="header">Astro</title>
+    </slot>
   </head>
   <body>
     <main>
