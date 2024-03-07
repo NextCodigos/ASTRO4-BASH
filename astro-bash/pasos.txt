@@ -206,8 +206,80 @@ import Post from "../components/Post.astro"
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 
+Los props en los componentyes son como los parametros
+ de una funcion, hacen reutilizables:
 
 
+index.astro:
+
+---
+import Post from "../components/Post.astro"
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>Astro</h1>
+		<!-- Pasamos props al componente -->
+		<!-- Unas llaves para javascript componente astro y otras para objeto -->
+		<Post post={{
+			title: "My super coool title",
+			description: "My super cool description"
+		}}/>
+		<Post post={{
+			title: "My super coool title 2",
+			description: "My super cool description 2"
+		}}/>
+		<Post post={{
+			title: "My super coool title 3",
+			description: "My super cool description 3"
+		}}/>
+		<Post post={{
+			title: "My super coool title 4",
+			description: "My super cool description 4"
+		}}/>
+		
+	</body>
+</html>
+
+
+
+Post.astro:
+
+---
+const {
+  post: { title, description },
+} = Astro.props;
+---
+
+<article
+  id="article"
+  class="flex max-w-sm flex-col gap-2 rounded bg-[#1F2937] px-5 py-6 text-white"
+>
+  <img
+    src="https://images.pexels.com/photos/67112/pexels-photo-67112.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    class="rounded"
+  />
+
+  <h2 class="text-2xl font-bold">{title}</h2>
+  <p>{description}</p>
+
+  <p class="text-zinc-300">
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque eius
+    distinctio aspernatur incidunt, tempore expedita architecto est, sint natus,
+    nihil quaerat nisi. Saepe pariatur nihil fugit itaque esse doloribus
+    corporis!
+  </p>
+  <p class="text-zinc-300">10/12/2023 - 16 min read</p>
+</article>
+
+<!-- Los props son como los argumentos de una funcion es lo que los hace reutiliables con diferentes fotos y contenidos -->
 
 
 ////////////////////////////////////////////
