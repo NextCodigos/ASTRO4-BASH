@@ -114,6 +114,42 @@ Post.astro:
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 
+❯ npx astro add tailwind
+✔ Resolving packages...
+16:58:53 
+  Astro will run the following command:
+  If you skip this step, you can always run it yourself later
+
+ ╭──────────────────────────────────────────────────────────╮
+ │ npm install @astrojs/tailwind@^5.1.0 tailwindcss@^3.4.1  │
+ ╰──────────────────────────────────────────────────────────╯
+
+✔ Continue? … yes
+✔ Installing dependencies...
+16:59:30 
+  Astro will generate a minimal ./tailwind.config.mjs file.
+
+✔ Continue? … yes
+16:59:34 
+  Astro will make the following changes to your config file:
+
+ ╭ astro.config.mjs ─────────────────────────────╮
+ │ import { defineConfig } from 'astro/config';  │
+ │                                               │
+ │ import tailwind from "@astrojs/tailwind";     │
+ │                                               │
+ │ // https://astro.build/config                 │
+ │ export default defineConfig({                 │
+ │   integrations: [tailwind()]                  │
+ │ });                                           │
+ ╰───────────────────────────────────────────────╯
+
+✔ Continue? … yes
+16:59:37   
+   success  Added the following integration to your project:
+  - @astrojs/tailwind
+
+  ╱  ~/E/ASTRO4-bueno2/stellar-sphere ╱ on   NextCodigos !3 ?1          
 
 
 
@@ -121,7 +157,49 @@ Post.astro:
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 
+Estilos a componente con tailwind,
+no son reutilizables la informacion de los componentes:
 
+Post.astro:
+
+---
+
+---
+
+<article id="article" class="flex max-w-sm flex-col gap-2 rounded bg-[#1F2937] px-5 py-6 text-white">
+  <img src="https://images.pexels.com/photos/67112/pexels-photo-67112.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="rounded" />
+  <h2 class="text-2xl font-bold">The Post Title</h2>
+  <p>A post description</p>
+  <p class="text-zinc-300">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque eius distinctio aspernatur incidunt, tempore expedita architecto est, sint natus, nihil quaerat nisi. Saepe pariatur nihil fugit itaque esse doloribus corporis!</p>
+  <p class="text-zinc-300">10/12/2023 - 16 min read</p>
+</article>
+
+Creamos varios componentes del post imagen y texto:
+
+///
+
+index.astro:
+
+---
+import Post from "../components/Post.astro"
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>Astro</h1>
+		<Post/>
+		<Post/>
+		<Post/>
+		<Post/>
+	</body>
+</html>
 
 
 
