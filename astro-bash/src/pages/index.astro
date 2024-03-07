@@ -1,7 +1,6 @@
 ---
 import Post from "../components/Post.astro";
 const response = await fetch("http://localhost:3000/posts");
-// Extraemos json de esos post
 const posts = await response.json();
 ---
 
@@ -10,28 +9,14 @@ const posts = await response.json();
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
-    <!-- Configuraciones de la página web -->
     <meta name="generator" content={Astro.generator} />
     <title>Astro</title>
   </head>
   <body>
-    <h1>Astro</h1>
-    <!-- Título principal de la página -->
-    <h1 class="text-center text-3xl font-bold mb-6 mt-3">
-      <!-- Estilo para centrar el texto -->
-      <!-- Estilo para establecer el tamaño del texto -->
-      <!-- Estilo para aplicar un peso de fuente en negrita -->
-      <!-- Estilo para agregar un margen inferior -->
-      <!-- Estilo para agregar un margen superior -->
-      Mis posts
-    </h1>
-    <!-- Título secundario de la página -->
+    <h1 class="text-center text-3xl font-bold mb-6 mt-3">Mis posts</h1>
     <div
-      class="grid max-w-7xl mx-auto w-full justify-center justify-items-center items-center gap-4 px-2 sm:grid-cols-2 lg:grid-cols-3"
+      class="grid max-w-7xl mx-auto w-full justify-center justify-items-center items-center gap-4 px-2 sm:grid:cols-2 lg:grid-cols-3"
     >
-      <!-- Contenedor de posts utilizando grid layout -->
-      <!-- Iteramos sobre el array de posts y renderizamos el componente Post -->
-      <!-- Le pasamos un prop llamado 'post' con el valor de cada post -->
       {posts.map((post) => <Post post={post} />)}
     </div>
   </body>
