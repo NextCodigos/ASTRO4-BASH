@@ -459,13 +459,20 @@ const {
 <!-- Los props son como los argumentos de una funcion es lo que los hace reutiliables con diferentes fotos y contenidos -->
 
 
+Minuto 29:54 
+video: 
+Astro 4.0: Tu Nuevo Framework De JavaScript Favorito
 
-
-
+Canal:￼
+Manu Martín
 
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 
+Iniciar base de datos:
+json-server --watch db.json
+Iniciar aplicacion Astro:
+npm run dev
 
 
 
