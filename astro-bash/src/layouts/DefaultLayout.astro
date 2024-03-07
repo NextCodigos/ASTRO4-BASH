@@ -1,3 +1,7 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+---
+
 <html lang="en">
   <head>
     <!-- Para utilzar head con diferentes nombres ,sino pongo en otras paginas toma este title por defecto-->
@@ -8,6 +12,7 @@
       <meta slot="header" name="generator" content={Astro.generator} />
       <title slot="header">Astro</title>
     </slot>
+    <ViewTransitions/>
   </head>
   <body>
     <main>

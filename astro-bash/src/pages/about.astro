@@ -1,14 +1,16 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro";
+import { Button } from "../components/Button";
+
 // Va no carga hasta que no se vea
 // export const prerender = true
 
 // para que haga peticion al servidor en false no de forma estatica
 export const prerender = false
-// import { Button } from "../components/Button";
 ---
 
 <DefaultLayout>
   <h1>Bienvenido a mi página About!</h1>
-  <!-- <Button client:visible /> -->
+  <!-- solo se vuelve interactivo cuando entra en la pagina -->
+  <Button client:visible />
 </DefaultLayout>
