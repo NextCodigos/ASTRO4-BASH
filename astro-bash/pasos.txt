@@ -1371,13 +1371,105 @@ export default defineConfig({
   integrations: [tailwind()]
 });
 
+/////////////////////
+
+en about.astro:
+
+---
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+// Va no carga hasta que no se vea
+// export const prerender = true
+
+// para que haga peticion al servidor en false no de forma estatica
+export const prerender = false
+// import { Button } from "../components/Button";
+---
+
+<DefaultLayout>
+  <h1>Bienvenido a mi página About!</h1>
+  <!-- <Button client:visible /> -->
+</DefaultLayout>
+
 
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 
+rutas dinamicas:
+ para crear id al pulsar imagen post central se amplia y solo se ve esa:
+
+en carpeta pages dentro de src creamos carpeta posts y archivo 
+
+[id].astro:
+
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+export async function getStaticPaths() {
+    // Para traer los distintops posts
+  const response = await fetch("http://localhost:3000/posts");
+  const posts = await response.json();
+  return posts.map((post) => {
+    return {
+      params: { id: post.id },
+    };
+  });
+}
+const { id } = Astro.params;
+
+const postResponse = await fetch(`http://localhost:3000/posts/${id}`);
+const { title, description, content, created_at } = await postResponse.json();
+---
+
+<DefaultLayout>
+  <div>
+    <article
+      class="text-black max-w-4xl mx-auto px-5 py-6 flex flex-col gap-2 rounded"
+    >
+      <img
+        src="https://images.pexels.com/photos/40185/mac-freelancer-macintosh-macbook-40185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        alt=""
+        class="rounded"
+      />
+      <h2 class="text-2xl font-bold">{title}</h2>
+      <p>{description}</p>
+      <p>
+        {content}
+      </p>
+    </article>
+  </div>
+</DefaultLayout>
 
 
+/////////////
 
+y en Post.astro:
+
+---
+const {
+  post: { title, description, content, created_at, id },
+} = Astro.props;
+---
+
+<a href={`/posts/${id}`}>
+  <article
+    class="bg-[#1F2937] text-white max-w-sm px-5 py-6 flex flex-col gap-2 rounded"
+  >
+    <img
+      src="https://images.pexels.com/photos/40185/mac-freelancer-macintosh-macbook-40185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      alt=""
+      class="rounded"
+    />
+    <h2 class="text-2xl font-bold">{title}</h2>
+    <p>{description}</p>
+    <p class="text-zinc-300">
+      {content.slice(0, 100) + "..."}
+    </p>
+    <p class="text-zinc-300">
+      {new Date(created_at).toLocaleDateString()} - 16 min read
+    </p>
+  </article>
+</a>
+
+Voy 1h02
 
 ////////////////////////////////////////////
 ////////////////////////////////////////////
