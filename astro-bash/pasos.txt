@@ -61,13 +61,53 @@ src
 En carpeta public tendremos imagenes y videos para la aplicacion.
 
 
-
-
-
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 
+Creando componentes:
+Dentro de src creamos carpeta componets.
 
+CREO PRIMER COMPONENTE ASTRO;
+
+index.astro:
+
+---
+import Post from "../components/Post.astro"
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>Astro</h1>
+		<Post/>
+	</body>
+</html>
+
+
+components componente astro:
+Post.astro:
+
+---
+
+---
+
+<article>
+  <img
+    src="https://images.pexels.com/photos/40185/mac-freelancer-macintosh-macbook-40185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    alt=""
+    class="rounded"
+  />
+  <h2>The Post Title</h2>
+  <p>A post description</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi necessitatibus ducimus corporis ut distinctio obcaecati voluptatem optio reiciendis, nulla reprehenderit perspiciatis qui tempora fuga, magni possimus quae officiis quaerat. Incidunt.</p>
+  <p>10/12/2023 - 16 min read</p>
+</article>
 
 
 

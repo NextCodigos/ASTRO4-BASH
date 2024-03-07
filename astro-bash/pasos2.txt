@@ -1,0 +1,590 @@
+CREAR PROYECTO ASTRO
+
+❯ npm create astro@latest
+
+ astro   Launch sequence initiated.
+
+   dir   Where should we create your new project?
+         ./stellar-sphere
+
+  tmpl   How would you like to start your new project?
+         Empty
+
+    ts   Do you plan to write TypeScript?
+         No
+      ◼  No worries! TypeScript is supported in Astro by default,
+         but you are free to continue writing JavaScript instead.
+
+  deps   Install dependencies?
+         Yes
+
+   git   Initialize a new git repository?
+         No
+      ◼  Sounds good! You can always run git init manually.
+
+      ✔  Project initialized!
+         ■ Template copied
+         ■ Dependencies installed
+
+  next   Liftoff confirmed. Explore your project!
+
+         Enter your project directory using cd ./stellar-sphere 
+         Run npm run dev to start the dev server. CTRL+C to stop.
+         Add frameworks like react or tailwind using astro add.
+
+         Stuck? Join us at https://astro.build/chat
+
+╭─────╮  Houston:
+│ ◠ ◡ ◠  Good luck out there, astronaut! 🚀
+╰─────╯
+❯ ls
+ stellar-sphere
+❯ cd stellar-sphere
+❯ ls
+ node_modules       package-lock.json
+ public             package.json
+ src                README.md
+ astro.config.mjs   tsconfig.json
+
+INICIAMOS:
+
+❯ npm run dev
+
+> stellar-sphere@0.0.1 dev
+> astro dev
+
+
+ astro  v4.4.12 ready in 140 ms
+
+┃ Local    http://localhost:4321/
+┃ Network  use --host to expose
+
+16:36:58 watching for file changes...
+16:37:17 [200] / 35ms
+
+////////////////////////////////////////////////////////
+
+CREO PRIMER COMPONENTE ASTRO;
+
+index.astro:
+
+---
+import Post from "../components/Post.astro"
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>Astro</h1>
+		<Post/>
+	</body>
+</html>
+
+
+components componente astro:
+Post.astro:
+
+---
+
+---
+
+<article>
+  <img
+    src="https://images.pexels.com/photos/40185/mac-freelancer-macintosh-macbook-40185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    alt=""
+    class="rounded"
+  />
+  <h2>The Post Title</h2>
+  <p>A post description</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi necessitatibus ducimus corporis ut distinctio obcaecati voluptatem optio reiciendis, nulla reprehenderit perspiciatis qui tempora fuga, magni possimus quae officiis quaerat. Incidunt.</p>
+  <p>10/12/2023 - 16 min read</p>
+</article>
+
+
+//////////////////////////////////////////////////////////////////////////
+
+❯ npx astro add tailwind
+✔ Resolving packages...
+16:58:53 
+  Astro will run the following command:
+  If you skip this step, you can always run it yourself later
+
+ ╭──────────────────────────────────────────────────────────╮
+ │ npm install @astrojs/tailwind@^5.1.0 tailwindcss@^3.4.1  │
+ ╰──────────────────────────────────────────────────────────╯
+
+✔ Continue? … yes
+✔ Installing dependencies...
+16:59:30 
+  Astro will generate a minimal ./tailwind.config.mjs file.
+
+✔ Continue? … yes
+16:59:34 
+  Astro will make the following changes to your config file:
+
+ ╭ astro.config.mjs ─────────────────────────────╮
+ │ import { defineConfig } from 'astro/config';  │
+ │                                               │
+ │ import tailwind from "@astrojs/tailwind";     │
+ │                                               │
+ │ // https://astro.build/config                 │
+ │ export default defineConfig({                 │
+ │   integrations: [tailwind()]                  │
+ │ });                                           │
+ ╰───────────────────────────────────────────────╯
+
+✔ Continue? … yes
+16:59:37   
+   success  Added the following integration to your project:
+  - @astrojs/tailwind
+
+  ╱  ~/E/ASTRO4-bueno2/stellar-sphere ╱ on   NextCodigos !3 ?1          
+
+//////////////////////////////////////////////////////////////////////////
+
+index.astro:
+
+---
+import Post from "../components/Post.astro"
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>Astro</h1>
+		<!-- Pasamos props al componente -->
+		<!-- Unas llaves para javascript componente astro y otras para objeto -->
+		<Post post={{
+			title: "My super coool title",
+			description: "My super cool description"
+		}}/>
+		<Post post={{
+			title: "My super coool title 2",
+			description: "My super cool description 2"
+		}}/>
+		<Post post={{
+			title: "My super coool title 3",
+			description: "My super cool description 3"
+		}}/>
+		<Post post={{
+			title: "My super coool title 4",
+			description: "My super cool description 4"
+		}}/>
+		
+	</body>
+</html>
+
+
+
+Post.astro:
+
+---
+const {
+  post: { title, description },
+} = Astro.props;
+---
+
+<article
+  id="article"
+  class="flex max-w-sm flex-col gap-2 rounded bg-[#1F2937] px-5 py-6 text-white"
+>
+  <img
+    src="https://images.pexels.com/photos/67112/pexels-photo-67112.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    class="rounded"
+  />
+
+  <h2 class="text-2xl font-bold">{title}</h2>
+  <p>{description}</p>
+
+  <p class="text-zinc-300">
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque eius
+    distinctio aspernatur incidunt, tempore expedita architecto est, sint natus,
+    nihil quaerat nisi. Saepe pariatur nihil fugit itaque esse doloribus
+    corporis!
+  </p>
+  <p class="text-zinc-300">10/12/2023 - 16 min read</p>
+</article>
+
+<!-- Los props son como los argumentos de una funcion es lo que los hace reutiliables con diferentes fotos y contenidos -->
+
+
+//////////////////////////////////////////////////////////////////////////
+
+Para simular base de datos:
+
+npm install -g json-server
+
+// Objeto de prueba para simular los post
+
+db.json:
+
+{
+    "posts": [
+        {
+            "id": 1,
+            "title": "The Benefits of Mindfulness Meditation",
+            "description": "Exploring the transformative effects of mindfulness meditation.",
+            "content": "Mindfulness meditation is a powerful practice that can enhance your mental and emotional well-being. By cultivating mindfulness, you can reduce stress, improve focus, and develop a deeper sense of self-awareness.\n\nIn mindfulness meditation, you simply observe your thoughts and feelings without judgment. It's about being present in the moment and acknowledging your experiences with acceptance and compassion.\n\nStudies have shown that regular mindfulness meditation can lead to reduced anxiety, increased resilience, and a greater sense of inner peace. So, if you're looking to improve your mental health, consider incorporating mindfulness meditation into your daily routine.\n\n# How to Get Started\n\n1. Find a quiet and comfortable space to sit or lie down.\n2. Close your eyes and take a few deep breaths to center yourself.\n3. Focus your attention on your breath or a specific point of awareness.\n4. When your mind wanders, gently bring it back to your chosen point of focus.\n5. Practice regularly for best results.\n\nRemember, mindfulness is a skill that takes time to develop, so be patient with yourself as you embark on this transformative journey.",
+            "author": "mindfulnessguide",
+            "created_at": "2023-01-15T09:30:00Z"
+        },
+        {
+            "id": 2,
+            "title": "Exploring the World of Astrophysics",
+            "description": "A journey into the mysteries of the universe.",
+            "content": "Astrophysics is a captivating field that delves into the fundamental questions about the cosmos. From the birth of stars to the existence of black holes, astrophysicists seek to unravel the mysteries of the universe.\n\nOne of the most intriguing topics in astrophysics is the search for extraterrestrial life. Scientists are exploring distant planets and moons, searching for signs of habitability and the potential for life beyond Earth.\n\nRecent discoveries, such as exoplanets in the habitable zone and the detection of organic molecules in space, have fueled excitement about the possibility of life elsewhere in the universe.\n\n# The Universe's Grand Design\n\nAstrophysicists also study the structure and evolution of galaxies, the nature of dark matter and dark energy, and the cosmic microwave background radiation. These investigations provide insights into the universe's past, present, and future.\n\nWhether you're an astronomy enthusiast or simply curious about the cosmos, astrophysics offers a fascinating glimpse into the mysteries of space and time.",
+            "author": "astrophysicist",
+            "created_at": "2023-02-20T11:45:00Z"
+        },
+        {
+            "id": 3,
+            "title": "The Art of Culinary Creativity",
+            "description": "Unlocking your inner chef and exploring culinary innovation.",
+            "content": "Cooking is more than just following recipes; it's an art form that allows you to express your creativity in the kitchen. Whether you're a seasoned chef or a home cook, there's always room for culinary experimentation.\n\n# Flavor Pairing\n\nOne way to unleash your culinary creativity is through flavor pairing. Experiment with unexpected combinations of ingredients to create unique and delightful dishes. The fusion of sweet and savory, spicy and tangy, can lead to exciting culinary discoveries.\n\n# Presentation Matters\n\nThe presentation of a dish can elevate your culinary creations to a whole new level. Pay attention to plating techniques, use colorful garnishes, and consider the visual appeal of your meals. A beautifully presented dish is a feast for the eyes.\n\n# Global Inspiration\n\nExplore cuisines from around the world for inspiration. Try your hand at recreating dishes from different cultures. Learn about the use of spices, herbs, and cooking techniques that are unique to various regions.\n\n# Embrace Mistakes\n\nDon't be afraid to make mistakes in the kitchen. Some of the greatest culinary inventions happened by accident. Embrace the learning process and use failures as stepping stones to culinary excellence.\n\n# Share Your Creations\n\nShare your culinary creations with friends and family. Host dinner parties or potlucks to showcase your innovative dishes. Feedback and appreciation from others can be a great source of motivation.\n\nCulinary creativity knows no bounds, and the kitchen is your canvas. So, put on your chef's hat, grab your apron, and start experimenting with flavors, textures, and presentation to create culinary masterpieces that reflect your unique style.",
+            "author": "culinaryartist",
+            "created_at": "2023-03-10T14:30:00Z"
+        },
+        {
+            "id": 4,
+            "title": "The Future of Sustainable Transportation",
+            "description": "Exploring eco-friendly innovations in the world of transportation.",
+            "content": "The world of transportation is undergoing a green revolution, with a focus on sustainability and reducing carbon emissions. From electric vehicles (EVs) to public transit improvements, there are numerous innovations shaping the future of transportation.\n\n# Electric Vehicles (EVs)\n\nEVs have gained popularity as a clean and efficient mode of transportation. Advancements in battery technology have increased the range and affordability of electric cars. The transition to EVs is a significant step toward reducing greenhouse gas emissions.\n\n# Public Transit Upgrades\n\nCities around the world are investing in public transit upgrades, including electric buses, expanded metro networks, and bike-sharing programs. These improvements aim to reduce traffic congestion and promote eco-friendly commuting options.\n\n# Sustainable Infrastructure\n\nInfrastructure plays a crucial role in sustainable transportation. The development of dedicated bike lanes, pedestrian-friendly streets, and charging stations for EVs encourages environmentally conscious travel.\n\n# Carpooling and Ride-Sharing\n\nCarpooling and ride-sharing services are contributing to reduced traffic and emissions. By sharing rides, individuals can reduce their carbon footprint and save on transportation costs.\n\n# Autonomous Vehicles\n\nThe future also holds the promise of autonomous vehicles. Self-driving cars can optimize traffic flow, reduce accidents, and improve fuel efficiency.\n\n# Conclusion\n\nThe future of transportation is green and sustainable. As technology advances and society prioritizes eco-friendly options, we can look forward to a cleaner and more efficient way of getting around. Embrace these innovations and play your part in reducing environmental impact.",
+            "author": "ecotransportation",
+            "created_at": "2023-04-20T10:15:00Z"
+        },
+        {
+            "id": 5,
+            "title": "Exploring the Art of Photography",
+            "description": "A journey through the lens, capturing moments in time.",
+            "content": "Photography is a powerful medium for capturing and preserving moments in time. Whether you're an amateur with a smartphone or a professional with high-end equipment, the art of photography offers endless creative possibilities.\n\n# The Magic of Composition\n\nComposition is a fundamental aspect of photography. Explore techniques such as the rule of thirds, leading lines, and framing to create visually stunning images. Experiment with angles and perspectives to convey unique stories.\n\n# Light and Shadows\n\nUnderstanding light is key to photography. Play with natural and artificial light sources to create dramatic effects. Embrace shadows and highlights to add depth and texture to your photos.\n\n# Storytelling through Images\n\nPhotography is a storytelling medium. Use your camera to capture moments, emotions, and narratives. From street photography to portraits, each image tells a story waiting to be shared.\n\n# Post-Processing and Editing\n\nEditing is an integral part of modern photography. Use software like Adobe Lightroom or mobile apps to enhance your photos, adjust colors, and fine-tune details. Remember that editing should enhance, not distort, the reality of your images.\n\n# Continuous Learning\n\nPhotography is a lifelong learning journey. Stay curious, experiment with new techniques, and seek inspiration from fellow photographers. Join photography communities, attend workshops, and explore different genres.\n\n# Conclusion\n\nPhotography is an art form that allows you to see the world through a unique perspective. Whether you're capturing landscapes, portraits, or everyday moments, embrace the joy of photography and share your visual stories with the world.",
+            "author": "photographyenthusiast",
+            "created_at": "2023-05-18T14:45:00Z"
+        },
+        {
+            "id": 6,
+            "title": "The Power of Positive Thinking",
+            "description": "Harnessing the mindset for personal growth and happiness.",
+            "content": "Positive thinking is a mindset that can transform your life for the better. It's the belief that your thoughts and attitude have a direct impact on your experiences and outcomes. By cultivating a positive mindset, you can improve your mental well-being and achieve greater happiness and success.\n\n# The Benefits of Positivity\n\nPositive thinking has numerous benefits, including reduced stress, increased resilience, and enhanced overall well-being. It can improve your relationships, boost your self-esteem, and increase your motivation to pursue your goals.\n\n# Strategies for Positive Thinking\n\n1. Practice gratitude: Start each day by acknowledging the things you're grateful for. Keep a gratitude journal to track positive moments in your life.\n2. Challenge negative thoughts: When negative thoughts arise, challenge them with positive affirmations and realistic perspectives.\n3. Surround yourself with positivity: Spend time with people who uplift and support you. Avoid toxic relationships and environments.\n4. Set achievable goals: Break down your goals into smaller, manageable steps. Celebrate your progress along the way.\n5. Mindfulness and meditation: Practice mindfulness to stay present and reduce anxiety. Meditation can help calm your mind and promote positivity.\n\n# Overcoming Challenges\n\nPositive thinking doesn't mean ignoring challenges or difficulties. It's about approaching them with a constructive mindset. When facing adversity, focus on solutions, resilience, and personal growth.\n\n# Conclusion\n\nPositive thinking is a powerful tool for personal growth and happiness. Embrace this mindset, and you'll find that even in challenging times, you have the strength and resilience to overcome obstacles and create a more fulfilling life.",
+            "author": "positivitychampion",
+            "created_at": "2023-06-10T11:20:00Z"
+        },
+        {
+            "id": 7,
+            "title": "The Future of Work: Remote and Hybrid Models",
+            "description": "Exploring the evolving landscape of work in a digital age.",
+            "content": "The world of work is undergoing a significant transformation, driven by advances in technology and changing attitudes toward remote and hybrid work models. As we move forward, the way we work is likely to look different from traditional office-based settings.\n\n# Rise of Remote Work\n\nRemote work has become more prevalent than ever before. With the advent of digital communication tools and flexible work arrangements, many employees now have the option to work from anywhere. This shift offers benefits such as reduced commute times, improved work-life balance, and access to a global talent pool.\n\n# The Hybrid Work Model\n\nThe hybrid work model blends remote and in-office work. It allows employees to choose where they work based on their preferences and the nature of their tasks. Hybrid models offer flexibility and the opportunity for face-to-face collaboration when needed.\n\n# Challenges and Opportunities\n\nWhile remote and hybrid work models provide many advantages, they also come with challenges. Employers must adapt to managing remote teams effectively, ensuring cybersecurity, and maintaining company culture. Employees need to manage their time, stay motivated, and maintain work-life boundaries.\n\n# The Future Workplace\n\nThe future of work will likely involve a mix of remote, hybrid, and on-site work options. Employers and employees will need to adapt to these changes and embrace new ways of collaborating and staying productive.\n\n# Conclusion\n\nThe future of work is evolving rapidly. Embrace the opportunities presented by remote and hybrid work models while addressing the challenges. By doing so, you can shape a future workplace that aligns with your goals and values.",
+            "author": "futureofwork",
+            "created_at": "2023-07-25T15:10:00Z"
+        },
+        {
+            "id": 8,
+            "title": "The Art of Storytelling in Marketing",
+            "description": "How compelling narratives drive successful marketing campaigns.",
+            "content": "Storytelling is a powerful tool in marketing that can captivate audiences and leave a lasting impression. When brands effectively tell their stories, they create a connection with customers, build trust, and drive engagement.\n\n# The Impact of Storytelling\n\nStories have the power to evoke emotions, and emotions drive decision-making. A well-crafted narrative can make a brand more relatable and memorable, setting it apart from competitors.\n\n# Elements of Effective Marketing Stories\n\n1. Relatability: Customers should be able to see themselves in the story. Relatable characters and situations make the story more engaging.\n2. Conflict and resolution: Stories often involve challenges or conflicts that are resolved, creating a satisfying narrative arc.\n3. Authenticity: Authentic stories resonate with audiences. Be honest and transparent in your storytelling.\n4. Visual storytelling: Incorporate visual elements like images and videos to enhance the storytelling experience.\n\n# Storytelling Across Platforms\n\nEffective storytelling can be applied across various marketing channels, including social media, websites, email marketing, and advertising. Tailor your stories to fit the platform and audience.\n\n# Measuring Impact\n\nMeasuring the impact of storytelling in marketing can be challenging, but it's essential. Monitor metrics like engagement rates, brand sentiment, and conversion rates to gauge the effectiveness of your storytelling efforts.\n\n# Conclusion\n\nThe art of storytelling in marketing is about connecting with your audience on a human level. Craft compelling narratives that resonate with your customers and watch as your brand gains recognition and loyalty.",
+            "author": "marketingstoryteller",
+            "created_at": "2023-08-12T09:45:00Z"
+        }
+    ]
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+
+❯ ls
+ stellar-sphere   pasos.txt
+❯ cd stellar-sphere
+
+Arrancar la base datos prueba json:
+
+❯ json-server --watch db.json
+--watch/-w can be omitted, JSON Server 1+ watches for file changes by default
+JSON Server started on PORT :3000
+Press CTRL-C to stop
+Watching db.json...
+
+(˶ᵔ ᵕ ᵔ˶)
+
+Index:
+http://localhost:3000/
+
+Static files:
+Serving ./public directory if it exists
+
+Endpoints:
+http://localhost:3000/posts
+
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+index.astro:
+
+---
+import Post from "../components/Post.astro";
+const response = await fetch("http://localhost:3000/posts");
+const posts = await response.json();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+
+    <!-- Pasamos props al componente -->
+    <!-- Unas llaves para javascript componente astro y otras para objeto -->
+    <!-- <Post post={{
+			title: "My super coool title",
+			description: "My super cool description"
+		}}/>
+		<Post post={{
+			title: "My super coool title 2",
+			description: "My super cool description 2"
+		}}/>
+		<Post post={{
+			title: "My super coool title 3",
+			description: "My super cool description 3"
+		}}/>
+		<Post post={{
+			title: "My super coool title 4",
+			description: "My super cool description 4"
+		}}/> -->
+    <h1 class="text-center text-3xl font-bold mb-6 mt-3">Mis posts</h1>
+    <div
+      class="grid max-w-7xl mx-auto w-full justify-center justify-items-center items-center gap-4 px-2 sm:grid:cols-2 lg:grid-cols-3"
+    >
+      {posts.map((post) => <Post post={post} />)}
+    </div>
+  </body>
+</html>
+
+//////////////
+
+Post.astro:
+
+---
+const {
+  post: { title, description,content,created_at },
+} = Astro.props;
+---
+
+<article
+  id="article"
+  class="flex max-w-sm flex-col gap-2 rounded bg-[#1F2937] px-5 py-6 text-white"
+>
+  <img
+    src="https://images.pexels.com/photos/67112/pexels-photo-67112.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    class="rounded"
+  />
+
+  <h2 class="text-2xl font-bold">{title}</h2>
+  <p>{description}</p>
+
+  <p class="text-zinc-300">
+    {content.slice(0, 100) + "..."}
+  </p>
+  <p class="text-zinc-300">{new Date(created_at).toLocaleDateString()} - 16 min read</p>
+</article>
+
+<!-- Los props son como los argumentos de una funcion es lo que los hace reutiliables con diferentes fotos y contenidos -->
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+
+LAYOUTS:
+slot sin poder reutilizar el nombre sin parametros:
+modifico index.astro:
+
+---
+import Post from "../components/Post.astro";
+const response = await fetch("http://localhost:3000/posts");
+const posts = await response.json();
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+---
+
+<DefaultLayout>
+  <h1 class="text-center text-3xl font-bold mb-6 mt-3">Mis posts</h1>
+  <div
+    class="grid max-w-7xl mx-auto w-full justify-center justify-items-center items-center gap-4 px-2 sm:grid:cols-2 lg:grid-cols-3"
+  >
+    {posts.map((post) => <Post post={post} />)}
+  </div>
+</DefaultLayout>
+
+CREO carpeta layouts con archivo DefaultLayout.astro:
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <main>
+      <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <div
+          class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+        >
+          <a
+            href="https://flowbite.com/"
+            class="flex items-center space-x-3 rtl:space-x-reverse"
+          >
+            <img
+              src="https://flowbite.com/docs/images/logo.svg"
+              class="h-8"
+              alt="Flowbite Logo"
+            />
+            <span
+              class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+              >Flowbite</span
+            >
+          </a>
+          <button
+            data-collapse-toggle="navbar-default"
+            type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 1h15M1 7h15M1 13h15"></path>
+            </svg>
+          </button>
+          <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+            <ul
+              class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+            >
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                  aria-current="page">Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >Pricing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- Para que se vean las cards -->
+      <slot />
+    </main>
+  </body>
+</html>
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+
+slot reutilizar el nombre con parametros:
+
+commit
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
+cd stellar-sphere
+
+instalar base datos .json:
+ npm install -g json-server
+
+iniciar base datos
+json-server --watch db.json
+
+ iniciar proyecto 
+ npm run dev
+
+
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+
+
+
