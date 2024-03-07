@@ -1,5 +1,8 @@
 ---
 import Post from "../components/Post.astro";
+const response = await fetch("http://localhost:3000/posts");
+// Extraemos json de esos post
+const posts = await response.json();
 ---
 
 <html lang="en">
@@ -13,30 +16,14 @@ import Post from "../components/Post.astro";
   <body>
     <h1>Astro</h1>
     <!-- Pasamos props al componente -->
-    <!-- Unas llaves para javascript componente astro y otras para objeto -->
-    <Post
-      post={{
-        title: "My super coool title",
-        description: "My super cool description",
-      }}
-    />
-    <Post
-      post={{
-        title: "My super coool title 2",
-        description: "My super cool description 2",
-      }}
-    />
-    <Post
-      post={{
-        title: "My super coool title 3",
-        description: "My super cool description 3",
-      }}
-    />
-    <Post
-      post={{
-        title: "My super coool title 4",
-        description: "My super cool description 4",
-      }}
-    />
+    <h1 class="text-center text-3xl font-bold mb-6 mt-3">Mis posts</h1>
+    <div
+      class="grid max-w-7xl mx-auto w-full justify-center justify-items-center items-center gap-4 px-2 sm:grid:cols-2 lg:grid-cols-3"
+    >
+	<!-- Convertimos el array de objetos en array de componentes post -->
+	<!-- Para la informacion db.json renderiza en cada post informacion -->
+	<!-- Al componente le pasamos un prop llamado post con valor de cada uno de los post que tengo en mi array  -->
+      {posts.map((post) => <Post post={post} />)}
+    </div>
   </body>
 </html>
